@@ -25,25 +25,34 @@ int main (int argc, char** argv) {
     cout << "Usage: ./build <name> -(argument)\n";
     cout << "Optional arguments:\n";
     cout << "  -h,  --help         print help message" << endl;
-    cout << "  -br, --build_run    builds and runs the program" << endl;
-    cout << "  -b,  --build        (default) builds the program" << endl;
+    cout << "  -br, --build_run    (default) builds and runs the program" << endl;
+    cout << "  -b,  --build        builds the program" << endl;
     cout << "  -r,  --run          runs the program" << endl;
     return 0;
   } else if (argc == 2){
+    // build
     char command[256];
-    sprintf(command, "g++ -o %s %s.cpp", argv[1], argv[1]);
+    sprintf(command, "g++ -std=c++20 -O2 -Wall -o %s %s.cpp", argv[1], argv[1]);
     int returnCode = system(command);
     if (returnCode != 0)
     {
       cout << "Something went wrong when executing:\n  " << command << endl;
       return 1;
     }
+      // run
+      sprintf(command, "./%s", argv[1]);
+      returnCode = system(command);
+      if (returnCode != 0)
+      {
+        cout << "Something went wrong when executing:\n  " << command << endl;
+        return 1;
+      }
   } else if (argc == 3) {
     if (strcmp(argv[2], "-br") == 0)
     {
       // build
       char command[256];
-      sprintf(command, "g++ -o %s %s.cpp", argv[1], argv[1]);
+    sprintf(command, "g++ -std=c++20 -O2 -Wall -o %s %s.cpp", argv[1], argv[1]);
       int returnCode = system(command);
       if (returnCode != 0)
       {
@@ -75,7 +84,7 @@ int main (int argc, char** argv) {
     {
       // build
       char command[256];
-      sprintf(command, "g++ -o %s %s.cpp", argv[1], argv[1]);
+    sprintf(command, "g++ -std=c++20 -O2 -Wall -o %s %s.cpp", argv[1], argv[1]);
       int returnCode = system(command);
       if (returnCode != 0)
       {
